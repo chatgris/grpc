@@ -58,11 +58,12 @@ unless windows
   nproc = 4
   nproc = Etc.nprocessors * 2 if Etc.respond_to? :nprocessors
   if ENV['GRPC_CPU_SIZE']
-    nproc = ENV['GRPC_CPU_SIZE']
+    nproc = ENV['GRPC_CPU_SIZE'].to_1
   end
+  p nproc
   make = bsd ? 'gmake' : 'make'
-  p $?
   system("#{make} -j#{nproc} -C #{grpc_root} #{grpc_lib_dir}/libgrpc.a CONFIG=#{grpc_config} Q=")
+  p $?
   exit 1 unless $? == 0
 end
 
