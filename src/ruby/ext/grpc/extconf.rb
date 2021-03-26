@@ -58,7 +58,10 @@ unless windows
   nproc = 4
   nproc = Etc.nprocessors * 2 if Etc.respond_to? :nprocessors
   make = bsd ? 'gmake' : 'make'
-  system("#{make} -j#{nproc} -C #{grpc_root} #{grpc_lib_dir}/libgrpc.a CONFIG=#{grpc_config} Q=")
+  command = "#{make} -j#{nproc} -C #{grpc_root} #{grpc_lib_dir}/libgrpc.a CONFIG=#{grpc_config} Q="
+  p pwd
+  p command
+  system(command)
   exit 1 unless $? == 0
 end
 
