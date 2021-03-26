@@ -58,7 +58,7 @@ unless windows
   nproc = 4
   nproc = Etc.nprocessors * 2 if Etc.respond_to? :nprocessors
   if ENV['GRPC_CPU_SIZE']
-    nproc = ENV['GRPC_CPU_SIZE'].to_1
+    nproc = ENV['GRPC_CPU_SIZE'].to_i
   end
   p nproc
   make = bsd ? 'gmake' : 'make'
